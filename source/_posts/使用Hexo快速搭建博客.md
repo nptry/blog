@@ -26,7 +26,7 @@ $ hexo server
 
 ## 部署
 这里只说部署到自己的服务器
-修改blog目录下的```_config.yml```文件
+修改blog目录下的`_config.yml`文件
 ```
 deploy:
   type: rsync
@@ -40,11 +40,7 @@ deploy:
   args: --rsync-path=sudo rsync
 ```
 
-执行命令
-```
-$ hexo deploy
-```
-可以将文件部署到服务器上。
+执行命令`$ hexo deploy`可以将文件部署到服务器上。
 
 ## 服务器部分
 
@@ -63,7 +59,7 @@ server {
 ```
 
 ### 配置https
-可先从[freessl](https://freessl.cn/)申请免费的ssl证书，获得pem和key两个证书文件。
+可先从[freessl](https://freessl.cn/)申请免费的ssl证书，获得.pem和.key两个证书文件。
 ```
 server {
     #ssl参数
@@ -78,15 +74,32 @@ server {
 重启nginx后便可通过https访问blog了。
 
 ## 更换主题
-我这里将默认主题换成了[Next](https://github.com/iissnan/hexo-theme-next)
+我这里将默认主题换成了[NexT](https://github.com/iissnan/hexo-theme-next)的Pisces风格
 
-在theme目录里下载了Next主题后，修改```_config.yml```文件：
+在theme目录里下载了Next主题后，修改`_config.yml`文件：
 ```
 ...
 theme: next
 ...
 ```
-重新部署后即生效。
+修改Next主题风格，修改`themes/next/_config.yml`文件：
+```
+...
+# Schemes
+# scheme: Muse
+#scheme: Mist
+scheme: Pisces
+#scheme: Gemini
+...
+```
+然后重新生成静态文件
+```
+$ hexo generate
+```
+重新部署后即生效
+```
+$ hexo deploy
+```
 
 
 
