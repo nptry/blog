@@ -151,6 +151,8 @@ tags:
 2. `$ hexo clean`
 3. `$ hexo g`
 
+## 打开阅读统计
+参见[Next主题集成的不蒜子统计](https://theme-next.iissnan.com/third-party-services.html#analytics-busuanzi)
 
 
 
