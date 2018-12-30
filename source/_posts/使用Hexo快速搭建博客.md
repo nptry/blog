@@ -105,6 +105,54 @@ $ hexo generate
 $ hexo deploy
 ```
 
+## 使用分类和标签功能
+我们发现左侧有分类和标签两个入口，但是不能点击，因为默认没有打开。
+创建标签页面：
+```
+$ hexo new page "tags"
+```
+编辑标签页面`source/tags/index.md`：
+```
+---
+title: tags
+date: 2018-12-30 20:59:40
+type: "tags"
+---
+```
+
+创建分类页面：
+```
+$ hexo new page "categories"
+```
+编辑分类页面`source/categories/index.md`：
+```
+---
+title: categories
+date: 2018-12-30 20:59:40
+type: "categories"
+---
+```
+
+刷新页面发现左侧分类和标签两个功能可用了。
+
+在文章中我们可以这样添加分类和标签：
+```
+---
+title: 使用Hexo快速搭建博客
+categories:
+- 集装箱
+tags:
+- hexo
+---
+```
+
+如果我们添加多个分类或标签后再删除，会发现其统计数量不对，这时需要清理缓存：
+1. 删除站点目录下的db.json
+2. `$ hexo clean`
+3. `$ hexo g`
+
+
+
 
 
 
