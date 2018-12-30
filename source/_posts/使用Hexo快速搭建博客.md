@@ -1,5 +1,9 @@
 ---
 title: 使用Hexo快速搭建博客
+categories:
+- 集装箱
+tags:
+- hexo
 ---
 [Hexo官网](https://hexo.io/)
 
