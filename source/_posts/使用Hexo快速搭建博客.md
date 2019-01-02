@@ -77,6 +77,15 @@ server {
 ```
 重启nginx后便可通过https访问blog了。
 
+重定向http到https, 修改80端口这部分配置为：
+```
+server {
+        listen       80;
+        server_name  www.nptry.com;
+        return 301 https://www.nptry.com$request_uri;
+    }
+```
+
 ## 更换主题
 我这里将默认主题换成了[NexT](https://github.com/iissnan/hexo-theme-next)的Pisces风格
 
