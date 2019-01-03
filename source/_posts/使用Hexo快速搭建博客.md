@@ -1,5 +1,5 @@
 ---
-title: 使用Hexo快速搭建博客
+title: 使用Hexo快速搭建blog
 categories:
 - 集装箱
 tags:
@@ -14,7 +14,7 @@ $ npm install hexo-cli -g
 
 ## 快速开始
 
-### 创建博客应用
+### 创建blog应用
 
 ``` bash
 $ hexo init blog
@@ -147,7 +147,7 @@ type: "categories"
 在文章中我们可以这样添加分类和标签：
 ```
 ---
-title: 使用Hexo快速搭建博客
+title: 使用Hexo快速搭建blog
 categories:
 - 集装箱
 tags:

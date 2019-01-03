@@ -27,6 +27,8 @@
 #}</div>
 {% endif %}
 
+
+
 {% if theme.footer.powered and theme.footer.theme.enable %}
   <span class="post-meta-divider">|</span>
 {% endif %}
@@ -45,3 +47,10 @@
   #}{{ theme.footer.custom_text }}{#
 #}</div>
 {% endif %}
+
+<div class="theme-info">
+  <span class="post-meta-divider">|</span>
+  <a class="theme-link" target="_blank" href="http://www.miitbeian.gov.cn/">
+    蜀ICP备17029534号  
+  </a>
+</div>
