@@ -12,4 +12,4 @@ tags:
 
 启用如图选项，填写白名单地址，重启浏览器即可。
 
-![圖](images/post/p1.png)
+![圖](/images/post/p1.png)
