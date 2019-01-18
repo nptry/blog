@@ -97,6 +97,7 @@ menu:
   #tags: /tags/ || tags
   #categories: /categories/ || th
   archives: /archives/ || archive
+  works: /works/ || grav
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -145,11 +146,12 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
+links_title: links
 links_layout: block
 #links_layout: inline
-#links:
-  #Title: http://example.com/
+links:
+  创造狮: http://chuangzaoshi.com/index
+  Markdown: https://zh.wikipedia.org/wiki/Markdown
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif

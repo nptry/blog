@@ -163,6 +163,10 @@ tags:
 ## 打开阅读统计
 参见[Next主题集成的不蒜子统计](https://theme-next.iissnan.com/third-party-services.html#analytics-busuanzi)
 
+## 添加作品展示页
+修改next主题的`_config.yml`配置文件，找到`menu`配置项，添加`works: /works/ || grav`就能在侧栏添加新的标签页，grav是[FontAwesome的图标](https://fontawesome.com/v4.7.0/icons/)，
+`hexo new page works`可以生成新的标签页文件目录，会在source目录下生成`works`文件目录，侧栏的链接就是链到这个目录的。
+
 
 
 
