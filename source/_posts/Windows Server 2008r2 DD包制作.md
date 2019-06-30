@@ -15,3 +15,11 @@ tags:
 3. 修改IE安全性
 4. 关闭Ctrl+Alt+Del激活
 5. 使用Hyper-V优化配置，关闭密码过期，安装Chrome
+
+
+# linux 安装脚本
+```
+#!/bin/sh
+
+wget --no-check-certificate -qO InstallNET.sh "https://shell.p1e.cn/reinstall/InstallNET.sh" && bash InstallNET.sh -dd 'DD包http直链地址'
+```
