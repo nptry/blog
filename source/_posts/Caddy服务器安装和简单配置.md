@@ -28,4 +28,4 @@ www.nptry.xyz {
     }
 }
 
-参考 ![使用 CADDY 代替 NGINX](https://imnerd.org/use-caddy-replace-nginx.html)
+参考 [使用 CADDY 代替 NGINX](https://imnerd.org/use-caddy-replace-nginx.html)
