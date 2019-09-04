@@ -20,6 +20,9 @@ $ curl https://getcaddy.com | bash -s tls.dns.cloudflare,tls.dns.googlecloud
 
 www.nptry.xyz {
     root /var/www/airport/public
+    rewrite {
+		  to {path} {path}/ /index.php
+		}
     fastcgi / /run/php/php7.3-fpm.sock php {
         index index.php index.html
     }

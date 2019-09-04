@@ -151,7 +151,7 @@ links_layout: block
 #links_layout: inline
 links:
   创造狮: http://chuangzaoshi.com/index
-  Markdown: https://zh.wikipedia.org/wiki/Markdown
+  Markdown: http://xianbai.me/learn-md/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
