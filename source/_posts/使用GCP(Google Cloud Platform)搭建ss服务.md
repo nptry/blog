@@ -32,11 +32,14 @@ tags:
 docker pull shadowsocks/shadowsocks-libev
 docker run -e PASSWORD=password -e METHOD=aes-256-cfb -p 30519:8388 -p 30519:8388/udp -d --restart always shadowsocks/shadowsocks-libev
 ```
-4. `docker container ps`查看，服务应该已经开启
+4. `docker ps`查看，服务应该已经开启
 5. 其它docker命令
 `docker ps -a --no-trunc` 查看docker运行的command的全语句
 `docker exec [container_id] bash -c 'echo "$ENV_VAR"'` 显示环境变量
-6. 配置ss客户端，填写正确的参数，It should be work now.
+6. 配置ss客户端，填写正确的参数，It should work now.
 
+## 其它提示
+1. 最后的效果，不仅有服务器的稳定性决定，也在很大程度上受运营商的QoS影响（其实我还没研究，不知道是啥），我电信连ss速度很慢，但是联通4G连ss很快，家里的联通宽带连ss速度飞快。
+2. 进一步提高速度还可以考虑CN2线路。宽带费用高。
 
 
