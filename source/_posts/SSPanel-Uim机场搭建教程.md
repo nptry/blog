@@ -7,7 +7,9 @@ tags:
 ---
 
 ## 前端面板程序安装与部署
-[前端安装](https://github.com/Anankke/SSPanel-Uim/wiki/%E5%89%8D%E7%AB%AF%E5%AE%89%E8%A3%85)
+~~[前端安装](https://github.com/Anankke/SSPanel-Uim/wiki/%E5%89%8D%E7%AB%AF%E5%AE%89%E8%A3%85)~~已迁移
+[SSPanel UIM Wiki](https://wiki.sspanel.host)
+[使用 LNMP 部署前端](https://blog.anank.ke/w/SSPanel_with_LNMP)
 施工中...🚧
 
 ## v2ray后端程序
@@ -33,7 +35,7 @@ docker方式部署，需要服务器支持docker, 低配openvz的vps很难安装
 mkdir v2ray-agent  &&  \
 cd v2ray-agent && \
 ~~curl https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install.sh -o install.sh && \ ~~ 此项目已迁移，下面是替代脚本
-curl https://github.com/hxc1427418039/v2ray-sspanel-v3-mod_Uim-plugin/blob/master/install.sh && \
+curl https://raw.githubusercontent.com/hxc1427418039/v2ray-sspanel-v3-mod_Uim-plugin/master/install.sh -o install.sh && \
 chmod +x install.sh && \
 bash install.sh
 ```
