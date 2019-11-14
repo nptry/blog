@@ -32,7 +32,8 @@ docker方式部署，需要服务器支持docker, 低配openvz的vps很难安装
 ```
 mkdir v2ray-agent  &&  \
 cd v2ray-agent && \
-curl https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install.sh -o install.sh && \
+~~curl https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install.sh -o install.sh && \ ~~ 此项目已迁移，下面是替代脚本
+curl https://github.com/hxc1427418039/v2ray-sspanel-v3-mod_Uim-plugin/blob/master/install.sh && \
 chmod +x install.sh && \
 bash install.sh
 ```
