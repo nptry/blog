@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="NPTRY">
 <meta property="og:description" content="求真">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-19T09:00:04.228Z">
+<meta property="og:updated_time" content="2020-08-19T10:37:19.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="categories">
 <meta name="twitter:description" content="求真">
@@ -289,6 +289,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -615,6 +618,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: a361162743@hotmail.com,
+        appId: 'AYVntHjC6bfYdluU1ScWVVhn-9Nh9j0Va',
+        appKey: 'B7g5SeWWxGq6yHkGBzW3XrKK',
+        placeholder: '请在此输入您的留言',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
