@@ -1,5 +1,7 @@
 ---
 title: 安卓手机使用TWRP方式刷机
+date: 2020-07-28
+updated: 2020-07-28
 categories:
 - 折腾
 tags:

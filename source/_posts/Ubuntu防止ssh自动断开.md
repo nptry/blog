@@ -1,5 +1,7 @@
 ---
 title: Ubuntu防止ssh自动断开
+date: 2019-01-13
+updated: 2019-01-13
 categories:
 - Linux
 tags:

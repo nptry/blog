@@ -1,5 +1,7 @@
 ---
 title: 使用Hexo快速搭建blog
+date: 2018-12-30
+updated: 2018-12-30
 categories:
 - 集装箱
 tags:

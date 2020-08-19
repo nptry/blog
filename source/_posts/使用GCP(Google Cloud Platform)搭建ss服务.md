@@ -1,5 +1,7 @@
 ---
 title: 使用GCP(Google Cloud Platform)搭建ss服务
+date: 2019-11-13
+updated: 2019-11-13
 categories:
 - 黑盒子
 tags:

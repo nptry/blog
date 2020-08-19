@@ -1,5 +1,7 @@
 ---
 title: Windows生成ssh key
+date: 2019-06-30
+updated: 2019-06-30
 categories:
 - Windows
 tags:

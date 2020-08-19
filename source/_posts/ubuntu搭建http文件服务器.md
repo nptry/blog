@@ -1,5 +1,7 @@
 ---
 title: Ubuntu搭建http文件服务器
+date: 2019-06-30
+updated: 2019-06-30
 categories:
 - Linux
 tags:

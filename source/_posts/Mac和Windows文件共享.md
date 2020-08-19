@@ -1,5 +1,7 @@
 ---
 title: Mac和Windows文件共享
+date: 2019-06-30
+updated: 2019-06-30
 categories:
 - Windows
 tags:
