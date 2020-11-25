@@ -258,6 +258,917 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/25/如何在一台服务器上部署两个网址/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/25/如何在一台服务器上部署两个网址/" itemprop="url">如何在一台服务器上部署两个网址.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-25T00:00:00+00:00">
+                2020-11-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-25T00:00:00+00:00">
+                2020-11-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/25/如何在一台服务器上部署两个网址/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/25/如何在一台服务器上部署两个网址/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/11/25/如何在一台服务器上部署两个网址/" class="leancloud_visitors" data-flag-title="如何在一台服务器上部署两个网址.md">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="jwilder-nginx-proxy"><a href="#jwilder-nginx-proxy" class="headerlink" title="jwilder/nginx-proxy"></a>jwilder/nginx-proxy</h2><p>通过<a href="https://hub.docker.com/r/jwilder/nginx-proxy" target="_blank" rel="noopener">nginx-proxy</a>的docker-compose来实现</p>
+<p>安装docker-compose并写入以下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">version: &apos;2&apos;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  nginx-proxy:</span><br><span class="line">    image: jwilder/nginx-proxy</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;80:80&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - /var/run/docker.sock:/tmp/docker.sock:ro</span><br><span class="line"></span><br><span class="line">  whoami:</span><br><span class="line">    image: jwilder/whoami</span><br><span class="line">    environment:</span><br><span class="line">      - VIRTUAL_HOST=whoami.com</span><br><span class="line"></span><br><span class="line">  printer:</span><br><span class="line">    image: printer</span><br><span class="line">    environment:</span><br><span class="line">      - VIRTUAL_HOST=printer.com</span><br><span class="line">    expose:</span><br><span class="line">      - &quot;80&quot;</span><br><span class="line"></span><br><span class="line">  silicone:</span><br><span class="line">    image: thiagobarradas/lamp:php-5.6</span><br><span class="line">    environment:</span><br><span class="line">      - VIRTUAL_HOST=silicone-oem.com</span><br><span class="line">    expose:</span><br><span class="line">      - &quot;80&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - /home/sixiaohan/silicone-oem.com:/app</span><br></pre></td></tr></table></figure></p>
+<p>执行<code>docker-compose up</code></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.youtube.com/watch?v=spbkCihFpQ8&amp;feature=youtu.be&amp;ab_channel=BobbyIliev" target="_blank" rel="noopener">How to Host Multiple Docker Containers on a Single Server with Nginx Reverse Proxy?</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/12/Learn Go/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/12/Learn Go/" itemprop="url">Learn Go</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-12T00:00:00+00:00">
+                2020-11-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-12T00:00:00+00:00">
+                2020-11-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习中/" itemprop="url" rel="index">
+                    <span itemprop="name">学习中</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/12/Learn Go/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/12/Learn Go/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/11/12/Learn Go/" class="leancloud_visitors" data-flag-title="Learn Go">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><ul>
+<li><p><a href="https://tour.go-zh.org/flowcontrol/12" target="_blank" rel="noopener">defer</a></p>
+</li>
+<li><p><a href="https://tour.go-zh.org/moretypes/1" target="_blank" rel="noopener">指针</a></p>
+<p>  <code>*int  &amp;i  *p</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var p *int</span><br><span class="line"></span><br><span class="line">i := 42</span><br><span class="line">p = &amp;i</span><br><span class="line"></span><br><span class="line">fmt.Println(*p)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://tour.go-zh.org/moretypes/2" target="_blank" rel="noopener">结构体struct</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Vector struct &#123;</span><br><span class="line">	X int</span><br><span class="line">	Y int</span><br><span class="line">&#125;</span><br><span class="line">v := Vector&#123;1, 2&#125;</span><br><span class="line">fmt.Println(v.X)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/12/Learn English/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/12/Learn English/" itemprop="url">Learn English</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-12T00:00:00+00:00">
+                2020-11-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-12T00:00:00+00:00">
+                2020-11-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习中/" itemprop="url" rel="index">
+                    <span itemprop="name">学习中</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/12/Learn English/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/12/Learn English/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/11/12/Learn English/" class="leancloud_visitors" data-flag-title="Learn English">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="PAST-SIMPLE-一般过去式"><a href="#PAST-SIMPLE-一般过去式" class="headerlink" title="PAST SIMPLE 一般过去式"></a>PAST SIMPLE 一般过去式</h1><ul>
+<li><a href="https://www.youtube.com/watch?v=dmJrYbDjxQY&amp;list=PLxSz4mPLHWDZ95iyxBNdjxLNI1k8HnVcd&amp;index=7&amp;ab_channel=LearnEnglishwithRebecca%5BengVid%5D" target="_blank" rel="noopener">过去分词的发音</a><br><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/WeChat9aa0bd0405662b55f64913edb69a2ebf.png" alt="过去分词的发音"></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/29/tcp:ip/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/29/tcp:ip/" itemprop="url">tcp/ip详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-29T00:00:00+00:00">
+                2020-09-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-29T00:00:00+00:00">
+                2020-09-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习中/" itemprop="url" rel="index">
+                    <span itemprop="name">学习中</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/09/29/tcp:ip/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/09/29/tcp:ip/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/09/29/tcp:ip/" class="leancloud_visitors" data-flag-title="tcp/ip详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="第一章：概述"><a href="#第一章：概述" class="headerlink" title="第一章：概述"></a>第一章：概述</h1><ul>
+<li><p>分层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">应用层(ftp、telnet、e-mail..)</span><br><span class="line">传输层(tcp和udp)</span><br><span class="line">网络层(ip、icmp)</span><br><span class="line">链路层(网卡及驱动)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>网桥<br><code>网桥</code>是在链路层对网络进行互联，<code>路由器</code>是在网络层对网络互联，网桥使得多个局域网（LAN）组合在一起，这样对上层来说就像一个局域网。</p>
+</li>
+<li><p>域名系统<br>域名系统（DNS）是一个分布的数据库。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/在Mac终端中使用SS代理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/14/在Mac终端中使用SS代理/" itemprop="url">在Mac终端中使用SS代理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-14T00:00:00+00:00">
+                2020-09-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-14T00:00:00+00:00">
+                2020-09-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/折腾/" itemprop="url" rel="index">
+                    <span itemprop="name">折腾</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/09/14/在Mac终端中使用SS代理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/09/14/在Mac终端中使用SS代理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/09/14/在Mac终端中使用SS代理/" class="leancloud_visitors" data-flag-title="在Mac终端中使用SS代理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="以下为备份，来自在Mac终端中使用SS代理"><a href="#以下为备份，来自在Mac终端中使用SS代理" class="headerlink" title="以下为备份，来自在Mac终端中使用SS代理"></a>以下为备份，来自<a href="https://sparkydogx.github.io/2017/08/30/tremina-ss/" target="_blank" rel="noopener">在Mac终端中使用SS代理</a></h1><p>SS是当前最好用的科学上网工具之一，但是在terminal中无法直接使用ss代理，需要使用额外的工具来实现这一功能。</p>
+<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>在开始之前，请确保：</p>
+<ul>
+<li>拥有一个可以正常使用的SS</li>
+<li>Mac上已安装有Homebrew</li>
+</ul>
+<h1 id="安装privoxy"><a href="#安装privoxy" class="headerlink" title="安装privoxy"></a>安装privoxy</h1><p>使用以下命令安装：<br><code>brew install privoxy</code></p>
+<h1 id="privoxy配置"><a href="#privoxy配置" class="headerlink" title="privoxy配置"></a>privoxy配置</h1><p>打开配置文件，文件路径为<code>/usr/local/etc/privoxy/config</code><br>在配置文件底部加入以下语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listen-address 0.0.0.0:8118</span><br><span class="line">forward-socks5 / localhost:1080 .</span><br></pre></td></tr></table></figure></p>
+<h1 id="启动privoxy"><a href="#启动privoxy" class="headerlink" title="启动privoxy"></a>启动privoxy</h1><p>输入以下语句：<br><code>sudo /usr/local/sbin/privoxy /usr/local/etc/privoxy/config</code><br>查看是否启动成功：<br><code>netstat -na | grep 8118</code><br>看到如下消息说明启动成功：<br><code>tcp4 0 0 *.8118 *.* LISTEN</code></p>
+<h1 id="使用privoxy"><a href="#使用privoxy" class="headerlink" title="使用privoxy"></a>使用privoxy</h1><p>在命令行终端中输入如下命令后，该终端即可走代理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=&apos;http://localhost:8118&apos;</span><br><span class="line">export https_proxy=&apos;http://localhost:8118&apos;</span><br></pre></td></tr></table></figure></p>
+<p>这时输入curl ip.gs会显示代理服务器的信息<br>关闭终端代理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unset http_proxy</span><br><span class="line">unset https_proxy</span><br></pre></td></tr></table></figure></p>
+<h1 id="配置bash文件"><a href="#配置bash文件" class="headerlink" title="配置bash文件"></a>配置bash文件</h1><p>经过上面几步，已经可以在终端使用SS代理，每次使用都需要输入一大串命令。可以在 ~/.bash_profile 里加入函数，便于使用。<br>macOS系统中默认没有.bash_profile文件，需要手动创建文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/</span><br><span class="line">touch .bash_profile</span><br></pre></td></tr></table></figure></p>
+<p>编辑<code>.bash_profile</code>文件：<code>open -e .bash_profile</code><br>在.bash_profile里写入函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function proxy_off()&#123;</span><br><span class="line">    unset http_proxy</span><br><span class="line">    unset https_proxy</span><br><span class="line">    echo -e &quot;已关闭代理&quot;</span><br><span class="line">&#125;</span><br><span class="line">function proxy_on() &#123;</span><br><span class="line">    export http_proxy=&apos;http://localhost:8118&apos;</span><br><span class="line">    export https_proxy=&apos;http://localhost:8118&apos;</span><br><span class="line">    echo -e &quot;已开启代理&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使配置立即生效：<code>source ~/.bash_profile</code></p>
+<h1 id="调用bash函数"><a href="#调用bash函数" class="headerlink" title="调用bash函数"></a>调用bash函数</h1><p>配置已经全部完成，在终端使用<code>proxy_on/proxy_off</code>指令即可打开/关闭代理</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/使用IBM Cloud搭建v2ray服务/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1154,934 +2065,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/life/学习从数据中辨识规律/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/18/life/学习从数据中辨识规律/" itemprop="url">学习从数据中辨识规律</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-18T00:00:00+00:00">
-                2019-11-18
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-18T00:00:00+00:00">
-                2019-11-18
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/18/life/学习从数据中辨识规律/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/18/life/学习从数据中辨识规律/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/11/18/life/学习从数据中辨识规律/" class="leancloud_visitors" data-flag-title="学习从数据中辨识规律">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/wisdom.png" alt="圖"><br>越智慧的人越能从数据中发现规律。</p>
-<p>一个人的力量太小了，一条鱼🐟没法和巨浪🌊搏斗。顺势而为，不需要费多少力气就可以走得很远。而关键在于发现势头在哪。<br>15年如果没有踩上买房的势头，现在买房对我依然是一个不可能完成的事。幸而当初从了买房的意见。<br>这是我想说的第一点，顺势。<br>忽然发现，这么多年，一直都是在听取别人的意见中活过来的。以前不懂的问题问家长，家长告诉我答案。现在不懂的问题，问知乎，问百度，问谷歌，别人给我建议，当然他们会提供他们的判断依据，他们参考的数据，和最后的分析结果。我就是在享用各种各样的结果（别人的经验，别人的结论）中长大的。<br>这次买房，从开始关注房市，到最终买房，都是在各种各样别人的分析结论中做取舍。他们都说滨江不好，于是我最终放弃了滨江，大家都去川发凑热闹，于是我也去。不是说这个决策不对，而是我说不出为什么对。我能说的都是，房产博主们所说过的内容。我就是个复读机（世界的本质就是复读机？）。我感觉我做决策是在别人的结论集里做融合取舍，而不是从根源数据上去分析。当然在实际的这件事上，我只有看各家所言，择善而从，之前没有关注房市，缺乏判断依据。<br>到最终选择公园都会，我本来还想咨询下同事意见，最后却没有再咨询别人意见，直接做了决定。就觉得自己看了两个月房了，别人未必了解我自己的实际情况，现在我自己觉得行了，在这个节点上，如果还依赖别人的结论，那我就完全没有自我意志了。<br>这是我想说的第二点，应该多多独立思考，严谨思考，相信自己的判断。</p>
-<p>下面是八卦内容：<br>晚上刷Twitter，给我推送的关于台湾游行的内容，全是支持台独态度的推。Twitter有诱导反华的行为，毫无疑问。<br>从这些内容里，发现一个视频，是一个MV，由林夕作词的一首歌，《双城记》。配上了游行的剪辑内容，有许多警察执法中涉及武力的片段。有很多经典好歌都是林夕作词，有些词看着实在是喜欢，感叹林夕的才华。这样一个家喻户晓的词作者，现在作了这样一首新词，立场站到了游行示威者那边，这对我产生了震动，我想要做进一步了解，同时也感慨，纵使各个媒体各有所言，都无法完全取得我的信任，也无法引起我的关注。而我们熟悉的词作者有这样一张行为后，我立即就想要去了解他的动机，他的想法。这就是文化的威力。<br>于是我搜索了林夕的近况，发现他被封杀了？原来罗大佑的《皇后大道东》是林夕作词（涉及政治），有趣的是《北京欢迎你》也是林夕作词，现在他又写了《双城记》，也是叫人感慨。</p>
-<div><br><div style="float: left;"><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/w_h_1.jpeg" width="150"></div><br><div style="float: left;"><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/w_h_2.jpeg" width="150"></div><br><div style="float: left;"><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/huanghoudadaodong.jpeg" width="150"></div><br><div><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/huanghoudadaodong2.jpeg" width="150"></div><br></div>
-
-<p>文化审查是真的厉害。</p>
-<p><a href="https://youtu.be/ERZboYStq0w" target="_blank" rel="noopener">双城记</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/sspanel搭建ss服务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/14/sspanel搭建ss服务/" itemprop="url">sspanel搭建ss服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T00:00:00+00:00">
-                2019-11-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-14T00:00:00+00:00">
-                2019-11-14
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/黑盒子/" itemprop="url" rel="index">
-                    <span itemprop="name">黑盒子</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/14/sspanel搭建ss服务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/14/sspanel搭建ss服务/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/11/14/sspanel搭建ss服务/" class="leancloud_visitors" data-flag-title="sspanel搭建ss服务">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前端面板添加ss节点"><a href="#前端面板添加ss节点" class="headerlink" title="前端面板添加ss节点"></a>前端面板添加ss节点</h2><ol>
-<li>节点地址填写后端ip</li>
-<li>节点ip不需要填</li>
-<li>只启用普通端口模式</li>
-</ol>
-<h2 id="docker-数据库方式-连接前端面板"><a href="#docker-数据库方式-连接前端面板" class="headerlink" title="docker + 数据库方式 连接前端面板"></a>docker + 数据库方式 连接前端面板</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=ssrmu -e NODE_ID=4 -e API_INTERFACE=glzjinmod -e MYSQL_HOST=127.0.0.1 -e MYSQL_USER=root -e MYSQL_DB=airport -e MYSQL_PASS=password --network=host --log-opt max-size=50m --log-opt max-file=3 --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>根据面板教程，订阅普通节点地址</p>
-<p>参考：<a href="https://wiki.sspanel.host/#/ssrmu-docker" target="_blank" rel="noopener">SSPanel v3 mod 后端（Docker）对接</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/Debain9开启bbr加速/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/13/Debain9开启bbr加速/" itemprop="url">Debain9开启bbr加速</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-13T00:00:00+00:00">
-                2019-11-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-13T00:00:00+00:00">
-                2019-11-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/黑盒子/" itemprop="url" rel="index">
-                    <span itemprop="name">黑盒子</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/13/Debain9开启bbr加速/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/13/Debain9开启bbr加速/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/11/13/Debain9开启bbr加速/" class="leancloud_visitors" data-flag-title="Debain9开启bbr加速">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><strong>1. 修改系统变量</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure></p>
-<p><strong>2. 保存生效</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure></p>
-<p><strong>3. 查看内核是否已开启BBR</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br></pre></td></tr></table></figure></p>
-<p>显示以下即已开启：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">net.ipv4.tcp_available_congestion_control = bbr cubic reno</span><br></pre></td></tr></table></figure></p>
-<p><strong>4. 查看BBR是否启动</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep bbr</span><br></pre></td></tr></table></figure></p>
-<p>显示以下即启动成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># lsmod | grep bbr</span><br><span class="line">tcp_bbr                20480  14</span><br></pre></td></tr></table></figure></p>
-<p>内容来自<a href="https://www.moerats.com/archives/297/" target="_blank" rel="noopener">Debian 9/10快速开启Google BBR的方法，实现高效单边加速</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/通过docker搭建v2ray服务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/13/通过docker搭建v2ray服务/" itemprop="url">通过docker搭建v2ray服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-13T00:00:00+00:00">
-                2019-11-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-13T00:00:00+00:00">
-                2019-11-13
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/黑盒子/" itemprop="url" rel="index">
-                    <span itemprop="name">黑盒子</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/13/通过docker搭建v2ray服务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/13/通过docker搭建v2ray服务/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/11/13/通过docker搭建v2ray服务/" class="leancloud_visitors" data-flag-title="通过docker搭建v2ray服务">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h2><p><code>docker pull v2ray/official</code></p>
-<h2 id="准备配置文件"><a href="#准备配置文件" class="headerlink" title="准备配置文件"></a>准备配置文件</h2><p>需要在<code>/etc/v2ray</code>下创建<code>config.json</code>文件<br>这是一个最简单的config.json文件示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;inbounds&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;port&quot;: 8888,</span><br><span class="line">      &quot;protocol&quot;: &quot;vmess&quot;,</span><br><span class="line">      &quot;settings&quot;: &#123;</span><br><span class="line">        &quot;clients&quot;: [</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;id&quot;: &quot;b123456d-6324-4d53-ad4f-8cda48b30811&quot;,</span><br><span class="line">            &quot;alterId&quot;: 64</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;outbounds&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;protocol&quot;: &quot;freedom&quot;,</span><br><span class="line">      &quot;settings&quot;: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><p>docker run -it -d –name v2ray -v /etc/v2ray:/etc/v2ray -p [外部端口]:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</p>
-<h2 id="配置v2ray客户端"><a href="#配置v2ray客户端" class="headerlink" title="配置v2ray客户端"></a>配置v2ray客户端</h2><p>id应与服务端的clients[‘id’]一致<br>It should work now.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/使用GCP(Google Cloud Platform)搭建ss服务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/13/使用GCP(Google Cloud Platform)搭建ss服务/" itemprop="url">使用GCP(Google Cloud Platform)搭建ss服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-13T00:00:00+00:00">
-                2019-11-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-20T00:00:00+00:00">
-                2020-08-20
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/黑盒子/" itemprop="url" rel="index">
-                    <span itemprop="name">黑盒子</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/11/13/使用GCP(Google Cloud Platform)搭建ss服务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/13/使用GCP(Google Cloud Platform)搭建ss服务/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/11/13/使用GCP(Google Cloud Platform)搭建ss服务/" class="leancloud_visitors" data-flag-title="使用GCP(Google Cloud Platform)搭建ss服务">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="注意：-现在（2020年8月查看）免费时间限定为90天了，没有搞头了。"><a href="#注意：-现在（2020年8月查看）免费时间限定为90天了，没有搞头了。" class="headerlink" title="注意： 现在（2020年8月查看）免费时间限定为90天了，没有搞头了。"></a>注意： 现在（2020年8月查看）免费时间限定为90天了，没有搞头了。</h2><h2 id="第一步：撸个GCP"><a href="#第一步：撸个GCP" class="headerlink" title="第一步：撸个GCP"></a>第一步：撸个GCP</h2><ol>
-<li>拥有一个新的gmail邮箱(现在要验证手机号，中国号码很早就不行了，美国虚拟号码现在也不行了，可以去某宝买一个，省事)</li>
-<li><a href="https://cloud.google.com/free-trial" target="_blank" rel="noopener">GCP免费试用</a>，从这个地址去试用。我这次是用的<a href="https://www.v2ex.com/t/600029#reply5" target="_blank" rel="noopener">别人的推广链接</a>注册的，在GCP这一步没有验证手机号，使用之前薅了两次的招行全币信用卡，完成了信用卡验证。</li>
-</ol>
-<h2 id="第二步：创建服务器"><a href="#第二步：创建服务器" class="headerlink" title="第二步：创建服务器"></a>第二步：创建服务器</h2><h3 id="选个好的服务器节点"><a href="#选个好的服务器节点" class="headerlink" title="选个好的服务器节点"></a>选个好的服务器节点</h3><ol>
-<li>今天测试结果，台湾地区的ping值最低，虽然要绕香港，但是延迟比香港节点的低，不知道为什么。</li>
-<li><a href="https://tools.ipip.net/traceroute.php" target="_blank" rel="noopener">在线路由追踪工具</a></li>
-<li>同样是台湾节点，不同的ip，丢包率不一样，好的ip丢包率在1%以下，试了好多ip都是7%左右的丢包率，丢包率对最后的ss效果影响很大，这里一定要挑到一个好的ip。</li>
-</ol>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol>
-<li>创建服务器的时候，选择台湾地区，我这次选的tw的east1-c区域的机器，选到了一个稳定的ip。创建的时候修改磁盘为SSD，大小为15G，我觉得10G小了点（因为要装点其它的程序）</li>
-<li>操作系统选debain 9，debain是ubuntu的原型，开源社区支持更多。</li>
-<li>创建完后得到ip，测试这个ip，ok则进行下一步</li>
-<li>配置ssh key，以便从终端访问服务器</li>
-<li>配置防火墙，允许所有流量通过 <code>0.0.0.0/0</code>，简单粗暴</li>
-<li>done</li>
-</ol>
-<h2 id="第三步：安装ss服务"><a href="#第三步：安装ss服务" class="headerlink" title="第三步：安装ss服务"></a>第三步：安装ss服务</h2><ol>
-<li>选择一个ss软件，我这里选用的<a href="https://github.com/shadowsocks/shadowsocks-libev" target="_blank" rel="noopener">ss-libev</a>，不为什么，就是看它star多，能用就行</li>
-<li>使用docker方式安装，用docker不会把系统搞乱，管理起来方便。<a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-debian-9" target="_blank" rel="noopener">debian9安装docker</a></li>
-<li><p>docker安装ss-libev，参数含义见<a href="https://github.com/shadowsocks/shadowsocks-libev#docker" target="_blank" rel="noopener">README</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull shadowsocks/shadowsocks-libev</span><br><span class="line">docker run -e PASSWORD=password -e METHOD=aes-256-cfb -p 30519:8388 -p 30519:8388/udp -d --restart always shadowsocks/shadowsocks-libev</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>docker ps</code>查看，服务应该已经开启</p>
-</li>
-<li>其它docker命令<br><code>docker ps -a --no-trunc</code> 查看docker运行的command的全语句<br><code>docker exec [container_id] bash -c &#39;echo &quot;$ENV_VAR&quot;&#39;</code> 显示环境变量</li>
-<li>配置ss客户端，填写正确的参数，It should work now.</li>
-</ol>
-<h2 id="其它提示"><a href="#其它提示" class="headerlink" title="其它提示"></a>其它提示</h2><ol>
-<li>最后的效果，不仅有服务器的稳定性决定，也在很大程度上受运营商的QoS影响（其实我还没研究，不知道是啥），我电信连ss速度很慢，但是联通4G连ss很快，家里的联通宽带连ss速度飞快。</li>
-<li>进一步提高速度还可以考虑CN2线路。宽带费用高。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2134,7 +2117,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2145,7 +2128,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2156,7 +2139,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
