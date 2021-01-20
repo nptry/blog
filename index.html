@@ -258,6 +258,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/04/v2Board机场搭建/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/04/v2Board机场搭建/" itemprop="url">v2Board机场搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-04T00:00:00+00:00">
+                2020-12-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-12-04T00:00:00+00:00">
+                2020-12-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/黑盒子/" itemprop="url" rel="index">
+                    <span itemprop="name">黑盒子</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/12/04/v2Board机场搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/12/04/v2Board机场搭建/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/12/04/v2Board机场搭建/" class="leancloud_visitors" data-flag-title="v2Board机场搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前端面板v2Board"><a href="#前端面板v2Board" class="headerlink" title="前端面板v2Board"></a>前端面板<a href="https://github.com/v2board/v2board-docker" target="_blank" rel="noopener">v2Board</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@github.com:v2board/v2board-docker.git</span><br><span class="line">$ cd v2board-docker</span><br><span class="line">//同步子仓库</span><br><span class="line">$ git submodule update --init --recursive</span><br><span class="line">//启动docker</span><br><span class="line">$ docker-compose up</span><br><span class="line">//进入mysql容器里查看ip</span><br><span class="line">$ docker exec -it v2board-docker_mysql_1 /bin/bash</span><br><span class="line"># cat /etc/hosts</span><br><span class="line"></span><br><span class="line">//进入v2board容器修改hosts</span><br><span class="line">$ docker exec -it v2board-docker_www_1 /bin/bash</span><br><span class="line"># vim /etc/hosts</span><br><span class="line">写入mysql容器的host和ip以通信</span><br><span class="line">//安装board</span><br><span class="line"># wget https://getcomposer.org/download/1.9.0/composer.phar</span><br><span class="line"># php composer.phar install</span><br><span class="line"># php artisan v2board:install</span><br><span class="line">数据库地址：填mysql容器的ip</span><br><span class="line">数据库名：v2board</span><br><span class="line">数据库用户名：root</span><br><span class="line">数据库密码：v2boardisbest</span><br><span class="line">完成</span><br></pre></td></tr></table></figure>
+<p>面板安装完成，输入地址访问。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p><code>404 Site xxx.xxx.xxx.xxx is not served on this interface</code><br>修改caddy.conf，把域名加到配置文件里</p>
+<h2 id="v2ray后端aurora"><a href="#v2ray后端aurora" class="headerlink" title="v2ray后端aurora"></a>v2ray后端<a href="https://github.com/tokumeikoi/aurora" target="_blank" rel="noopener">aurora</a></h2><h2 id="波塞冬后端（付费，50人内免费）"><a href="#波塞冬后端（付费，50人内免费）" class="headerlink" title="波塞冬后端（付费，50人内免费）"></a>波塞冬后端（付费，50人内免费）</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/26/超速学习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -404,6 +581,189 @@
 <p><em>閱讀催眠狀態，也就是 身體在模仿閱讀的動作，心思卻飄到了別處。</em></p>
 <h2 id="无法真正专注"><a href="#无法真正专注" class="headerlink" title="无法真正专注"></a>无法真正专注</h2><p>不同的兴奋度会影响专注度，不同复杂度的任务也需要不同的兴奋的，应该自己找到适当的兴奋度。</p>
 <p><code>你可以遵循一定流程来提升专注度。我的建议是:承认你所处的状态，然后从小处着手。如果你是那种一分钟都坐不住的人，就试着坐好不动半分 钟。半分钟很快就会变成一分钟，然后两分钟。随着时间过去，你在学习上感受到的挫折感，就会转变成真正的兴趣;想去做让你分心之事的 冲动，也会随着你的每一次抗拒而减弱。带着耐心与坚持，你的忍耐几分钟，就会越拉越长，足以让你完成了不起的事</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/25/docker/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hans">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NPTRY">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/25/docker/" itemprop="url">docker基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-25T00:00:00+00:00">
+                2020-11-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-25T00:00:00+00:00">
+                2020-11-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/11/25/docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/25/docker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/11/25/docker/" class="leancloud_visitors" data-flag-title="docker基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>image就像方便面，在任何地方都可以放上佐料，泡上水，就是一碗热腾腾的泡面出来了，你还可以加点其他的佐料，泡好的泡面就相当于运行中的container。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰 Docker 入门教程</a></p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>docker ps</code> 或 <code>docker container ls</code><br><code>docker container list -a</code><br><code>docker container stop [containerID]</code><br><code>docker container rm [containerID]</code></p>
+<p>查看日志<br><code>docker container logs [containerID]</code> </p>
+<p>进入一个容器<br><code>docker container exec -it [containerID] /bin/bash</code></p>
+<p>提交对容器的修改<br><code>docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</code><br>例如：<br><code>docker commit -m &quot;config mysql&quot; 3e16e505a3b2 thiagobarradas/lamp:php-5.6</code></p>
+<p>参数<br>-v local_file_path:docker_path 把本地文件映射到docker里</p>
+<h2 id="docker-hub"><a href="#docker-hub" class="headerlink" title="docker hub"></a>docker hub</h2><p>在<a href="https://hub.docker.com" target="_blank" rel="noopener">docker hub</a>注册后，可创建一个免费仓库<br>在命令行运行<code>docker login</code>登录后可将image上传到仓库<br><code>docker pull [imageName]</code></p>
+<h2 id="容器间的通信"><a href="#容器间的通信" class="headerlink" title="容器间的通信"></a>容器间的通信</h2><p>每个容器有自己的内部ip，可<code>cat /etc/hosts</code>查看<br>如果A容器想要访问B容器的服务，可直接在A的hosts里写入B的ip即可。<br>在docker-compose文件中，是<em><code>extra_hosts</code></em>这个参数。</p>
 
           
         
@@ -630,188 +990,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/25/docker/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/11/25/docker/" itemprop="url">docker基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-25T00:00:00+00:00">
-                2020-11-25
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-11-25T00:00:00+00:00">
-                2020-11-25
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/11/25/docker/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/11/25/docker/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/11/25/docker/" class="leancloud_visitors" data-flag-title="docker基础">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>image就像方便面，在任何地方都可以放上佐料，泡上水，就是一碗热腾腾的泡面出来了，你还可以加点其他的佐料，泡好的泡面就相当于运行中的container。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html" target="_blank" rel="noopener">阮一峰 Docker 入门教程</a></p>
-<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><code>docker ps</code> 或 <code>docker container ls</code><br><code>docker container list -a</code><br><code>docker container stop [containerID]</code><br><code>docker container rm [containerID]</code></p>
-<p>查看日志<br><code>docker container logs [containerID]</code> </p>
-<p>进入一个容器<br><code>docker container exec -it [containerID] /bin/bash</code></p>
-<p>提交对容器的修改<br><code>docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</code><br>例如：<br><code>docker commit -m &quot;config mysql&quot; 3e16e505a3b2 thiagobarradas/lamp:php-5.6</code></p>
-<p>参数<br>-v local_file_path:docker_path 把本地文件映射到docker里</p>
-<h2 id="docker-hub"><a href="#docker-hub" class="headerlink" title="docker hub"></a>docker hub</h2><p>在<a href="https://hub.docker.com" target="_blank" rel="noopener">docker hub</a>注册后，可创建一个免费仓库<br>在命令行运行<code>docker login</code>登录后可将image上传到仓库<br><code>docker pull [imageName]</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/12/Learn English/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -941,6 +1119,7 @@
             <h1 id="PAST-SIMPLE-一般过去式"><a href="#PAST-SIMPLE-一般过去式" class="headerlink" title="PAST SIMPLE 一般过去式"></a>PAST SIMPLE 一般过去式</h1><ul>
 <li><a href="https://www.youtube.com/watch?v=dmJrYbDjxQY&amp;list=PLxSz4mPLHWDZ95iyxBNdjxLNI1k8HnVcd&amp;index=7&amp;ab_channel=LearnEnglishwithRebecca%5BengVid%5D" target="_blank" rel="noopener">过去分词的发音</a><br><img src="https://hans-blog.oss-cn-beijing.aliyuncs.com/WeChat9aa0bd0405662b55f64913edb69a2ebf.png" alt="过去分词的发音"></li>
 </ul>
+<h1 id="FUTURE-CONTINUOUS-将来进行时"><a href="#FUTURE-CONTINUOUS-将来进行时" class="headerlink" title="FUTURE CONTINUOUS 将来进行时"></a>FUTURE CONTINUOUS 将来进行时</h1><p>sub + will be + doing<br>只有动态动词有进行时，静态动词没有进行时态</p>
 
           
         
@@ -1900,183 +2079,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/31/JSON数据/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hans">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NPTRY">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/08/31/JSON数据/" itemprop="url">JSON数据</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-31T00:00:00+00:00">
-                2020-08-31
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-31T00:00:00+00:00">
-                2020-08-31
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/08/31/JSON数据/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/31/JSON数据/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/08/31/JSON数据/" class="leancloud_visitors" data-flag-title="JSON数据">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我需要把积分和积分对应的金额返回给前端，我构造了一种json数据：{ ‘积分’: ‘金额’ } 像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list: &#123;</span><br><span class="line">	&quot;100&quot;: 1, # 100积分对应1元金额</span><br><span class="line">	&quot;200&quot;: 2,</span><br><span class="line">	&quot;300&quot;: 3,</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我认为这样数据最简单，结果前端说我这个不好解析，我还纳闷，不就是取到值遍历就完了嘛，但Android和iOS都说不好解析，大概是他们的框架设定了相对固定的解析格式，通常需要确定的key。<br>沟通后将格式改成了下面这种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">list: [</span><br><span class="line">	&#123;</span><br><span class="line">		积分: 100,</span><br><span class="line">		金额: 1,</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		积分: 100,</span><br><span class="line">		金额: 2,</span><br><span class="line">	&#125;,</span><br><span class="line">	...</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p>看上去第二种似乎确实意义更明晰。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2129,7 +2131,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2222,7 +2224,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

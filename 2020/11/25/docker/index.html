@@ -388,6 +388,7 @@
 <p>提交对容器的修改<br><code>docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</code><br>例如：<br><code>docker commit -m &quot;config mysql&quot; 3e16e505a3b2 thiagobarradas/lamp:php-5.6</code></p>
 <p>参数<br>-v local_file_path:docker_path 把本地文件映射到docker里</p>
 <h2 id="docker-hub"><a href="#docker-hub" class="headerlink" title="docker hub"></a>docker hub</h2><p>在<a href="https://hub.docker.com" target="_blank" rel="noopener">docker hub</a>注册后，可创建一个免费仓库<br>在命令行运行<code>docker login</code>登录后可将image上传到仓库<br><code>docker pull [imageName]</code></p>
+<h2 id="容器间的通信"><a href="#容器间的通信" class="headerlink" title="容器间的通信"></a>容器间的通信</h2><p>每个容器有自己的内部ip，可<code>cat /etc/hosts</code>查看<br>如果A容器想要访问B容器的服务，可直接在A的hosts里写入B的ip即可。<br>在docker-compose文件中，是<em><code>extra_hosts</code></em>这个参数。</p>
 
       
     </div>
@@ -418,8 +419,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/12/Learn English/" rel="next" title="Learn English">
-                <i class="fa fa-chevron-left"></i> Learn English
+              <a href="/2020/11/25/如何在一台服务器上部署两个网址/" rel="next" title="如何在一台服务器上部署两个网址.md">
+                <i class="fa fa-chevron-left"></i> 如何在一台服务器上部署两个网址.md
               </a>
             
           </div>
@@ -428,8 +429,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/11/25/如何在一台服务器上部署两个网址/" rel="prev" title="如何在一台服务器上部署两个网址.md">
-                如何在一台服务器上部署两个网址.md <i class="fa fa-chevron-right"></i>
+              <a href="/2020/11/26/超速学习/" rel="prev" title="超速学习">
+                超速学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -512,7 +513,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -601,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#笔记"><span class="nav-number">2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">2.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-hub"><span class="nav-number">2.2.</span> <span class="nav-text">docker hub</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#笔记"><span class="nav-number">2.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">2.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-hub"><span class="nav-number">2.2.</span> <span class="nav-text">docker hub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器间的通信"><span class="nav-number">2.3.</span> <span class="nav-text">容器间的通信</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -621,7 +622,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
