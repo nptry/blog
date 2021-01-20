@@ -41,6 +41,7 @@ tags:
 
 ## 启动服务
 docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p [外部端口]:8888 v2ray/official v2ray -config=/etc/v2ray/config.json
+例如：docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 20519:8888 v2ray/official v2ray -config=/etc/v2ray/config.json
 
 ## 配置v2ray客户端
 id应与服务端的clients['id']一致

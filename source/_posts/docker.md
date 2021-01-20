@@ -40,3 +40,9 @@ image就像方便面，在任何地方都可以放上佐料，泡上水，就是
 在[docker hub](https://hub.docker.com)注册后，可创建一个免费仓库
 在命令行运行`docker login`登录后可将image上传到仓库
 `docker pull [imageName]`
+
+
+## 容器间的通信
+每个容器有自己的内部ip，可`cat /etc/hosts`查看
+如果A容器想要访问B容器的服务，可直接在A的hosts里写入B的ip即可。
+在docker-compose文件中，是*`extra_hosts`*这个参数。
